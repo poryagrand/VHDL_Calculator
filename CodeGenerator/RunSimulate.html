@@ -1,0 +1,18 @@
+
+<script>
+    var code = "force -freeze sim:/calculator/input {now} 0;force -freeze sim:/calculator/isButtonPushed {clock} 0;{type};\n";
+
+    function toCode(number,step){
+        var clk = true;
+        var t = number.toString().split("");
+        var all = "";
+        for(var i in t){
+            all += code
+            .replace("{now}",t[i])
+            .replace("{clock}",clk?1:0)
+            .replace("{type}",step?"step -over":"run -continue");
+            clk = !clk;
+        }
+        return all;
+    }
+</script>
